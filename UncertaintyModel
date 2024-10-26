@@ -1,0 +1,33 @@
+# Load required library
+library(ggplot2)
+
+# Function to plot uncertainty intervals in R with specified order
+plot_uncertainty_intervals <- function(measurements, base_measurement, absolute_uncertainties) {
+  # Create a data frame with intervals
+  data <- data.frame(
+    Measurement = factor(measurements, levels = measurements),  # Ensuring correct order
+    Lower = base_measurement - absolute_uncertainties,
+    Upper = base_measurement + absolute_uncertainties,
+    Mid = base_measurement
+  )
+  
+  # Plotting using ggplot2
+  ggplot(data, aes(x = Measurement)) +
+    geom_linerange(aes(ymin = Lower, ymax = Upper), color = "red", size = 1.5) +
+    geom_point(aes(y = Lower), color = "blue", size = 3) +
+    geom_point(aes(y = Upper), color = "blue", size = 3) +
+    geom_hline(yintercept = base_measurement, linetype = "dashed", color = "grey") +
+    labs(title = "Uncertainty Intervals at Each Calibration Cycle (in m³/s)",
+         x = "Calibration and Measurement Points",
+         y = "Measurement (m³/s)") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+}
+
+# Example usage
+measurements_example <- c("NIST Standard", "Accredited Lab", "Manufacturer", "On-site Calibration", "Installed Meter")
+base_measurement_example <- 1.0
+absolute_uncertainties_example <- c(0.00025, 0.00056, 0.00114, 0.0023, 0.0023)
+
+# Call the function with the example data
+plot_uncertainty_intervals(measurements_example, base_measurement_example, absolute_uncertainties_example)
