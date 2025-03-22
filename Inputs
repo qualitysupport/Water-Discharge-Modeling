@@ -31,7 +31,7 @@ Data Loss <- 0
 
 Bias <- 0
 
-Drift <- 0
+Drift <- 2
 
 Repeatability <- 0
 
