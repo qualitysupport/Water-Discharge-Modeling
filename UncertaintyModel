@@ -1,33 +1,33 @@
-# Load required library
-library(ggplot2)
+# Re-plot with sleek dark theme
+plt.style.use("dark_background")
 
-# Function to plot uncertainty intervals in R with specified order
-plot_uncertainty_intervals <- function(measurements, base_measurement, absolute_uncertainties) {
-  # Create a data frame with intervals
-  data <- data.frame(
-    Measurement = factor(measurements, levels = measurements),  # Ensuring correct order
-    Lower = base_measurement - absolute_uncertainties,
-    Upper = base_measurement + absolute_uncertainties,
-    Mid = base_measurement
-  )
-  
-  # Plotting using ggplot2
-  ggplot(data, aes(x = Measurement)) +
-    geom_linerange(aes(ymin = Lower, ymax = Upper), color = "red", size = 1.5) +
-    geom_point(aes(y = Lower), color = "blue", size = 3) +
-    geom_point(aes(y = Upper), color = "blue", size = 3) +
-    geom_hline(yintercept = base_measurement, linetype = "dashed", color = "grey") +
-    labs(title = "Uncertainty Intervals at Each Calibration Cycle (in m³/s)",
-         x = "Calibration and Measurement Points",
-         y = "Measurement (m³/s)") +
-    theme_minimal() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1))
-}
+# Plot in original uncertainty interval style with sleek dark background
+fig, ax = plt.subplots(figsize=(10, 6))
 
-# Example usage
-measurements_example <- c("NIST Standard", "Accredited Lab", "Manufacturer", "On-site Calibration", "Installed Meter")
-base_measurement_example <- 1.0
-absolute_uncertainties_example <- c(0.00025, 0.00056, 0.00114, 0.0023, 0.0023)
+# Draw vertical uncertainty bars
+for i, row in df_interval_style.iterrows():
+    ax.plot([row["Measurement"], row["Measurement"]], [row["Lower"], row["Upper"]], color='#FF4C4C', linewidth=2)
+    ax.plot(row["Measurement"], row["Lower"], 'o', markersize=6, color='#00BFC4')
+    ax.plot(row["Measurement"], row["Upper"], 'o', markersize=6, color='#00BFC4')
 
-# Call the function with the example data
-plot_uncertainty_intervals(measurements_example, base_measurement_example, absolute_uncertainties_example)
+# Baseline at 0
+ax.axhline(y=base_measurement_gpm, color='gray', linestyle='--')
+
+# Labels and styling
+ax.set_title("Uncertainty Intervals by Source (± GPM)", fontsize=14, weight='bold', pad=15)
+ax.set_xlabel("Source", fontsize=12)
+ax.set_ylabel("Uncertainty Range (GPM)", fontsize=12)
+ax.tick_params(axis='x', rotation=45, colors='white')
+ax.tick_params(axis='y', colors='white')
+ax.yaxis.grid(True, linestyle='--', alpha=0.4)
+ax.xaxis.grid(False)
+
+# Set background colors
+fig.patch.set_facecolor('#111111')
+ax.set_facecolor('#111111')
+ax.title.set_color('white')
+ax.xaxis.label.set_color('white')
+ax.yaxis.label.set_color('white')
+
+plt.tight_layout()
+plt.show()
