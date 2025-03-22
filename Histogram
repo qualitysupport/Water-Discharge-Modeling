@@ -1,0 +1,25 @@
+# Updated parameters for production drift scenario
+drift_uncertainty = 2.0  # Production drift uncertainty in GPM
+
+# Generate new simulated values
+simulated_drift_values = np.random.normal(loc=nominal_value, scale=drift_uncertainty, size=num_simulations)
+
+# Plot histogram
+fig, ax = plt.subplots(figsize=(10, 6))
+n, bins, patches = ax.hist(simulated_drift_values, bins=50, color='#F28500', edgecolor='white', alpha=0.9)
+
+# Add spec limits
+ax.axvline(low_limit, color='red', linestyle='--', linewidth=2, label='Low Limit (34.20 GPM)')
+ax.axvline(high_limit, color='red', linestyle='--', linewidth=2, label='High Limit (37.80 GPM)')
+
+# Title and labels
+ax.set_title("Simulated Production Drift (10,000 samples)", fontsize=14, weight='bold')
+ax.set_xlabel("Measurement (GPM)", fontsize=12)
+ax.set_ylabel("Frequency", fontsize=12)
+
+# Legend and grid
+ax.legend()
+ax.grid(True, linestyle='--', alpha=0.6)
+
+plt.tight_layout()
+plt.show()
