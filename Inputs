@@ -1,0 +1,16 @@
+NIST Standard <- .0005 GPM
+
+Accredited Lab <- 0.0016 GPM
+
+Installation <- 0.01 GPM
+
+Production Drift <- 2 GPM
+
+
+#At 36 GPM test point in the laboratory our lower limit is 34.20 and higher limit is 37.80 and our uncertainty is 0.0016 GPM.
+
+Lab Uncertainty <- 0.0016
+
+Low Limit <- 34.20
+
+High Limit <- 37.80
