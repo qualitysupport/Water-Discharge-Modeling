@@ -1,3 +1,5 @@
+
+
 NIST Standard <- .0005 GPM
 
 Accredited Lab <- 0.0016 GPM
@@ -14,3 +16,34 @@ Lab Uncertainty <- 0.0016
 Low Limit <- 34.20
 
 High Limit <- 37.80
+
+
+
+Uncertainty Contributions
+
+Linearity <- 0
+
+Calibration Uncertainty <- 0.0016
+
+Atmospheric Noise <- 0
+
+Data Loss <- 0
+
+Bias <- 0
+
+Drift <- 0
+
+Repeatability <- 0
+
+Linearity <- 0
+
+Equipment Configuration <- 0
+
+Computer Algorithm Configuration <- 0
+
+K-Factor Configurations <- 0
+
+
+
+
+
